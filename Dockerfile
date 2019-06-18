@@ -7,4 +7,6 @@ RUN bundle install
 
 COPY . .
 
+ENV DB_HOST $DB_HOST
+
 CMD ["rackup", "-p", "3000"]
