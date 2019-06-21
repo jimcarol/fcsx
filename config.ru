@@ -47,7 +47,7 @@ class Middleware
         data.delete("BaiduTOP10")
       elsif env["PATH_INFO"] === "/tieba"
         selected = "tieba"
-        tieba_data = Tieba.limit(100).select([:id, :url, :title, :author, :author_link])
+        tieba_data = Tieba.order(id: :desc).limit(100).select([:id, :url, :title, :author, :author_link])
         data = { "tieba" => tieba_data }
       end
 
