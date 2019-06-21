@@ -8,5 +8,6 @@ RUN bundle install
 COPY . .
 
 ENV DB_HOST $DB_HOST
+EXPOSE 80
 
-CMD ["rackup", "-p", "3000"]
+CMD rackup -o 0.0.0.0 -p 80

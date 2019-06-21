@@ -1,7 +1,8 @@
 class RenderTemplate_
-  def initialize(types, data)
+  def initialize(types, data, selected)
     @types = types
     @data = data
+    @selected = selected
   end
 end
 

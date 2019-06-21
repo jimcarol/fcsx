@@ -3,19 +3,52 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="./styles.css" />
   <title>news</title>
 </head>
 <body>
-  <% @types.each do |type|%>
-    <div class="content">
-      <h2><%= type.underscore %></h2>
-      <ul>
-        <% @data[type].each do |f| %>
-          <li><span><%= f.order_num %></span>: <a href=<%= f.url %> target="_blank"><%= f.title %></a></li>
-        <% end %>
-      </ul>
-    </div>
+  <div class="header">
+    <h1>NEWS</h1>
+    <ul>
+      <% @types.each do |type|%>
+        <a href="/<%=type%>"><li class="header-item <%= type === @selected ? 'active' : '' %>"><%= type %></li></a>
+      <% end %>
+    </ul>
+  </div>
+  <div class="mobile-nav">
+    <% @types.each do |type|%>
+      <a href="/<%=type%>" class="mobile-header-item <%= type === @selected ? 'active' : '' %>"><%= type %></a>
+    <% end %>
+  </div>
+  <% @data.each do |k, v|%>
+    <% if k === "tieba" %>
+      <div class="tb-content">
+        <h2>NBA 贴吧</h2>
+        <ul>
+          <% v.each do |f| %>
+            <li>
+              <a href="<%= f.url %>" target="_blank" class="title"><%= f.title %></a>
+              <a href="<%= f.author_link %>" target="_blank" class="author"><%= f.author %></a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% else %>
+      <div class="content">
+        <h2><%= k === "Zhibo8TOP10" ? "直播吧热门视频前10" : "百度热门搜索排行前10" %></h2>
+        <ul>
+          <% v.each do |f| %>
+            <li>
+              <span class="<%= f.order_num.to_i < 4 ? 'hot' : '' %>">
+                <%= f.order_num %>
+              </span>
+              <a href=<%= f.url %> target="_blank"><%= f.title %></a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
   <% end %>
 </body>
 </html>
