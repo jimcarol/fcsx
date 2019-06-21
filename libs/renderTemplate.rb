@@ -1,3 +1,5 @@
+#encoding:utf-8
+
 class RenderTemplate_
   def initialize(types, data, selected)
     @types = types
